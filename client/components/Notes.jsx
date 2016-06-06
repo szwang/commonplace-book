@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { addNote, deleteNote } from '../actions/notes';
 
 const STYLES = {
-
   link: {
     textDecoration: 'none'
   },
@@ -57,7 +56,7 @@ const Notes = ({ sheet, notes, addNote, deleteNote }) =>
       <h1>This book has no notes in it :(</h1>
     }
     <a className={sheet.classes.button} onClick={addNote}>
-      add a note into the book
+      Add a note into the book
     </a>
   </div>;
 

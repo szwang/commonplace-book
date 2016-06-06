@@ -53,3 +53,11 @@ heroku local webpackdev
 heroku local server
 open http://localhost:3000
 ```
+
+n.b. there may be Chrome console errors (`'//@ sourceURL' and '//@ sourceMappingURL' are deprecated, please use '//# sourceURL=' and '//# sourceMappingURL=' instead.`). 
+
+Enter the following regex into the console filter to remove them:
+
+```
+^((?!sourceURL).)*$
+```
