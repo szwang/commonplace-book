@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import useSheet from 'react-jss';
 import VisibleNotes from '../components/VisibleNotes';
+import AddNote from '../components/AddNote';
 import { connect } from 'react-redux';
 import { requestNotes } from '../actions/notes';
 
@@ -8,7 +8,8 @@ const indexStyle = {
   width: '100%',
   display: 'flex',
   backgroundColor: '#edd9c0',
-  color: '#7d4627'
+  color: '#7d4627',
+  paddingLeft: '20px'
 }
 
 class Index extends React.Component {
@@ -25,6 +26,7 @@ class Index extends React.Component {
     return (
       <div style={indexStyle}>
         <VisibleNotes />
+        <AddNote />
       </div>
     )
   }

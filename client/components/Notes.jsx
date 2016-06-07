@@ -1,6 +1,5 @@
 import React from 'react';
 import Note from './Note';
-// import useSheet from 'react-jss';
 
 const styles = {
   link: {
@@ -37,9 +36,10 @@ const Notes = ({ notes, addNote, deleteNote }) =>
   <div>
     <h1>Suzanne's Commonplace Book</h1>
     {!!notes.length &&
-      <div>
+      <div style={styles.basket}>
         {notes.map(note => (
-          <Note key={`note-${note.id}`}
+          <Note 
+                key={`note-${note.id}`}
                 note={note}
                 onDeleteNote={deleteNote} />
         ))}
