@@ -1,50 +1,48 @@
 import React from 'react';
 import Note from './Note';
-import useSheet from 'react-jss';
-import { connect } from 'react-redux';
-import { addNote, deleteNote } from '../actions/notes';
+// import useSheet from 'react-jss';
 
-const STYLES = {
-  link: {
-    textDecoration: 'none'
-  },
+// const styles = {
+//   link: {
+//     textDecoration: 'none'
+//   },
 
-  basket: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    flexWrap: 'wrap'
-  },
+//   basket: {
+//     display: 'flex',
+//     flexDirection: 'row',
+//     alignSelf: 'stretch',
+//     flexWrap: 'wrap'
+//   },
 
-  notes: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '60%'
-  },
+//   notes: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     width: '60%'
+//   },
 
-  button: {
-    padding: '1rem 1.5rem',
-    background: '#FFAAAA',
-    '&:hover': {
-      background: '#FFBBBB'
-    },
-    border: 0,
-    borderRadius: '0.5rem',
-    cursor: 'pointer',
-    margin: '2rem',
-    textAlign: 'center',
-    userSelect: 'none'
-  }
-};
+//   button: {
+//     padding: '1rem 1.5rem',
+//     background: '#FFAAAA',
+//     '&:hover': {
+//       background: '#a8b6bf'
+//     },
+//     border: 0,
+//     borderRadius: '0.5rem',
+//     cursor: 'pointer',
+//     margin: '2rem',
+//     textAlign: 'center',
+//     userSelect: 'none'
+//   }
+// };
 
-const Notes = ({ sheet, notes, addNote, deleteNote }) =>
-  <div className={sheet.classes.notes}>
+
+
+const Notes = ({ notes, addNote, deleteNote }) =>
+  <div>
+    <h1>Suzanne's Commonplace Book</h1>
     {!!notes.length &&
-      <h1>Notes in this book:</h1>
-    }
-    {!!notes.length &&
-      <div className={sheet.classes.basket}>
+      <div>
         {notes.map(note => (
           <Note key={`note-${note.id}`}
                   note={note}
@@ -55,14 +53,9 @@ const Notes = ({ sheet, notes, addNote, deleteNote }) =>
     {!notes.length &&
       <h1>This book has no notes in it :(</h1>
     }
-    <a className={sheet.classes.button} onClick={addNote}>
+    <a onClick={addNote}>
       Add a note into the book
     </a>
   </div>;
 
-export default connect(
-  state => ({ notes: state.notes }),
-  { addNote, deleteNote }
-)(
-  useSheet(Notes, STYLES)
-);
+export default Notes

@@ -15,6 +15,7 @@ export function addNote() {
         note: result
       });
     } catch(e) {
+      console.log('error:', e)
       dispatch({
         type: actionTypes.ADD_NOTE_ERROR
       });

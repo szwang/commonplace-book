@@ -1,40 +1,41 @@
 import React, { Component } from 'react';
-import useSheet from 'react-jss';
-import Notes from '../components/Notes';
+// import useSheet from 'react-jss';
+import VisibleNotes from '../components/VisibleNotes';
 import { connect } from 'react-redux';
 import { requestNotes } from '../actions/notes';
 
-const STYLES = {
-  index: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFDDDD',
-    color: '#660000'
-  }
-};
+// const indexStyle = {
+//   width: '100%',
+//   height: '100%',
+//   display: 'flex',
+//   alignItems: 'center',
+//   justifyContent: 'center',
+//   backgroundColor: '#edd9c0',
+//   color: '#7d4627'
+// }
 
-export default class Index extends Component {
+class Index extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
   componentDidMount() {
-    this.props.requestNotes();
+    const { dispatch } = this.props
+    dispatch(requestNotes())
   }
 
   render() {
-    const { sheet } = this.props;
-
     return (
-      <div className={sheet.classes.index}>
-        <Notes />
+      <div>
+        <VisibleNotes />
       </div>
-    );
+    )
   }
 }
 
-export default connect(
-  () => ({}),
-  { requestNotes }
-)(
-  useSheet(Index, STYLES)
-);
+function mapStateToProps(state) {
+  const { notes } = state
+  return { notes }
+}
+
+export default connect(mapStateToProps)(Index)
