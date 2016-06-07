@@ -10,8 +10,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addNote: () => {
-      dispatch(addNote({ content: 'hi', category: 'book'}))
+    addNote: (data) => {
+      dispatch(addNote(data))
     },
     deleteNote: (id) => {
       dispatch(deleteNote(id))

@@ -1,56 +1,48 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addNote } from '../actions/notes'
 
-let AddNote = ({ dispatch }) => {
-  let content, category
+class AddNote extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      content: '',
+      category: ''
+    }
 
-  return (
-    <div>
-      <form onSubmit={e => {
-        e.preventDefault()
-        if (!input.value.trim()) {
-          return
-        }
-        dispatch(addNote({ content: content.value, category: category.value}))
-        input.value = ''
-      }}>
-        <input ref={node => {
-          category = node
-        }} />
-        <input ref={ node => {
-          content = node
-        }} />
-        <button type="submit">
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    this.setState({ 
+      content: this.refs.content.value,
+      category: this.refs.category.value 
+    })
+  }
+
+  render() {
+    const { onAddNote } = this.props;
+    
+    return (
+      <div> 
+        <input
+          type="text"
+          value={this.state.content}
+          placeholder="enter content here"
+          onChange={this.handleChange}
+          ref="content" />
+        <input 
+          type="text"
+          value={this.state.category}
+          placeholder="enter category here"
+          onChange={this.handleChange}
+          ref="category" />
+        <button onClick={onAddNote.bind(this, this.state)}>
           Add Note
         </button>
-      </form>
-    </div>
-  )
+      </div>
+    )
+  }
 }
-
-AddNote = connect()(AddNote)
-
-// class AddNote extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       content: null,
-//       category: null
-//     }
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <Modal show={this.props.showNoteModal}>
-//         <Modal.Footer>
-//           <Button>Close</Button>
-//         </Modal.Footer>
-//         </Modal>
-//       </div>
-//     )
-//   }
-// }
 
 export default AddNote

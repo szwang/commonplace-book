@@ -26,7 +26,6 @@ class Index extends React.Component {
     return (
       <div style={indexStyle}>
         <VisibleNotes />
-        <AddNote />
       </div>
     )
   }
