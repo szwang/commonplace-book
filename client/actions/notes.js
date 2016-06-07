@@ -1,15 +1,15 @@
 import * as actionTypes from '../actionTypes/notes';
 import { get, post, del } from '../utils/api';
 
-export function addNote() {
+export function addNote(data) {
   return async dispatch => {
     dispatch({
       type: actionTypes.ADD_NOTE
     });
 
     try {
-      const result = await post('/api/cp-book');
-
+      const result = await post('/api/cp-book', data);
+      console.log(result)
       dispatch({
         type: actionTypes.ADD_NOTE_SUCCESS,
         note: result

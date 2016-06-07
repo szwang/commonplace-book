@@ -5,6 +5,10 @@ from models import Note, User, Tag
 
 cp_book_api = Api(Blueprint('cp_book_api', __name__)) 
 
+parser = reqparse.RequestParser()
+parser.add_argument('content')
+parser.add_argument('category')
+
 @cp_book_api.resource('/cp-book')
 class NotesAPI(Resource):
   @staticmethod
@@ -15,15 +19,20 @@ class NotesAPI(Resource):
       'id': note.id
     } for note in notes]
 
+
   def post(self):
     from app import db
 
-    new_note = Note()
+    args = parser.parse_args()
+    new_note = Note(content=args['content'], category=args['category'])
+
     db.session.add(new_note)
     db.session.commit()
 
     return {
       'id': new_note.id,
+      'content': new_note.content,
+      'category': new_note.category,
       'created': new_note.created_at.isoformat() + 'Z'
     }
 

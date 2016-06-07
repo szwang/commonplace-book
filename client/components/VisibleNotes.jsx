@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addNote: () => {
-      dispatch(addNote())
+      dispatch(addNote({ content: 'hi', category: 'book'}))
     },
     deleteNote: () => {
       dispatch(deleteNote())
