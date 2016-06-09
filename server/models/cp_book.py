@@ -10,8 +10,12 @@ class User(db.Model):
   username = db.Column(db.Unicode(60), unique=True)
   email = db.Column(db.Unicode(100), unique=True)
   password = db.Column(db.Unicode(120))
+  active = db.Column(db.Boolean(), default=True)
 
   notes = db.relationship("Note")
+
+  def is_active(self):
+    return self.active
 
 tag_note = db.Table('tags_notes',
   db.Column('tag_id', db.Integer, db.ForeignKey('tags.id')),

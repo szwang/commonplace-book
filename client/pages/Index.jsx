@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import VisibleNotes from '../components/VisibleNotes';
+import NoteContainer from '../containers/NoteContainer';
 import AddNote from '../components/AddNote';
 import { connect } from 'react-redux';
 import { requestNotes } from '../actions/notes';
@@ -25,7 +25,7 @@ class Index extends React.Component {
   render() {
     return (
       <div style={indexStyle}>
-        <VisibleNotes />
+        <NoteContainer />
       </div>
     )
   }

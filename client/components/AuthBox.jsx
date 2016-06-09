@@ -1,23 +1,64 @@
-import React from 'react';
+import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions/auth';
 
-const STYLES = {
+const styles = {
+  form: {
+    marginTop: '200px',
+    marginLeft: '500px'
+  }
 };
 
-const AuthBox = ({ sheet, loginUser }) =>
-  <div>
-    <form>
-      <input type="username" />
-      <input type="password" />
-      <button type="submit">Submit</button>
-    </form>
-  </div>;
+class AuthBox extends Component {
+  constructor(props) {
+    super(props)
 
-export default connect(
-  state => ({ loggedInUserId: state.loggedInUserId }),
-  { loginUser }
-)(
-  useSheet(AuthBox, STYLES)
-)
+    this.state = {
+      username: '',
+      email:'',
+      password: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    this.setState({ 
+      username: this.refs.username.value,
+      email: this.refs.email.value,
+      password: this.refs.password.value 
+    })
+  }
+
+  render() {
+    const { loginUser, registerUser } = this.props;
+        
+    return (
+      <div style={styles.form}>
+        <input 
+          type="text"
+          value={this.state.username}
+          placeholder="enter username here"
+          onChange={this.handleChange}
+          ref="username" />
+        <input
+          type="text"
+          value={this.state.email}
+          placeholder="enter email here"
+          onChange={this.handleChange}
+          ref="email"/>
+        <input
+          type="text"
+          value={this.state.password}
+          placeholder="enter password here"
+          onChange={this.handleChange}
+          ref="password"/>
+        <button onClick={registerUser.bind(this, {username: this.state.username, password: this.state.password})}>
+          Register
+        </button>
+      </div>
+    )
+  }
+}
+
+export default AuthBox;

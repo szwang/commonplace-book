@@ -11,6 +11,7 @@ async function request({ url, data, params = {} }) {
       body: data ? ((data instanceof FormData) ? data : JSON.stringify(data)) : undefined,
       ...params
     })
+    
     const contentType = response.headers.get('content-type');
 
     if (response.status < 200 || response.status >= 400) {

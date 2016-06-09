@@ -8,8 +8,8 @@ export function addNote(data) {
     });
 
     try {
-      const result = await post('/api/cp-book', data);
-      console.log(result)
+      const result =  await post('/api/cp-book', data);
+
       dispatch({
         type: actionTypes.ADD_NOTE_SUCCESS,
         note: result
@@ -31,6 +31,7 @@ export function requestNotes() {
 
     try {
       const result = await get('/api/cp-book');
+      console.log(result)
       dispatch({
         type: actionTypes.REQUEST_NOTES_SUCCESS,
         notes: result

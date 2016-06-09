@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions/auth';
-import AuthBox from '../components/AuthBox';
+import { loginUser, registerUser } from '../actions/auth';
+import AuthContainer from '../containers/AuthContainer';
 
-const STYLES = {
-  authPage: {
 
-  }
-};
-
-export default class AuthPage extends Component {
+class AuthPage extends Component {
   componentDidMount() {
   }
 
@@ -18,15 +13,19 @@ export default class AuthPage extends Component {
 
     return (
       <div>
-        <AuthBox />
+        <AuthContainer />
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
+}
+
 export default connect(
-  () => ({}),
-  { loginUser }
-)(
-  useSheet(AuthPage, STYLES)
-);
+  mapStateToProps
+)(AuthPage);
+

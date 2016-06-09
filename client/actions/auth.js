@@ -14,7 +14,7 @@ export function loginUser() {
     }
 
     try {
-      const result = await post('/api/auth', data);
+      const result = await post('/api/auth/login', data);
 
       dispatch({
         type: actionTypes.LOGIN_USER_SUCCESS
@@ -27,6 +27,24 @@ export function loginUser() {
   }
 }
 
-export function registerUser() {
+export function registerUser(data) {
+  return async dispatch => {
+    dispatch({
+      type: actionTypes.REGISTER_USER
+    });
 
+    console.log(data)
+
+    try {
+      const result = await post('/api/auth/signup', data);
+
+      dispatch({
+        type: actionTypes.REGISTER_USER_SUCCESS
+      })
+    } catch(e) {
+      dispatch({
+        type: actionTypes.REGISTER_USER_ERROR
+      })
+    }
+  }
 }

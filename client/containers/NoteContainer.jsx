@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { addNote, deleteNote } from '../actions/notes'
-import Notes from './Notes'
+import Notes from '../components/Notes'
 
 const mapStateToProps = (state) => {
   return {
