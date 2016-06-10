@@ -36,13 +36,35 @@ export function registerUser(data) {
 
     try {
       const result = await post('/api/auth/signup', data);
-      console.log(data)
+      console.log(result)
       dispatch({
         type: actionTypes.REGISTER_USER_SUCCESS
       })
     } catch(e) {
       dispatch({
         type: actionTypes.REGISTER_USER_ERROR
+      })
+    }
+  }
+}
+
+export function logoutUser(data) {
+  return async dispatch => {
+    dispatch({
+      type: actionTypes.LOGOUT_USER
+    });
+
+    console.log(data)
+
+    try {
+      const result = await post('/api/auth/logout', data);
+      console.log('result')
+      dispatch({
+        type: actionTypes.LOGOUT_USER_SUCCESS
+      })
+    } catch(e) {
+      dispatch({
+        type: actionTypes.LOGOUT_USER_ERROR
       })
     }
   }

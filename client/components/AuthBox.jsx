@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import useSheet from 'react-jss';
 import { connect } from 'react-redux';
 
 const styles = {
@@ -31,7 +30,7 @@ class AuthBox extends Component {
   }
 
   render() {
-    const { loginUser, registerUser } = this.props;
+    const { loginUser, registerUser, showRegister } = this.props;
         
     return (
       <div style={styles.form}>
@@ -41,24 +40,27 @@ class AuthBox extends Component {
           placeholder="enter username here"
           onChange={this.handleChange}
           ref="username" />
-        <input
+        { this.props.showRegister ? <input
           type="text"
           value={this.state.email}
           placeholder="enter email here"
-          onChange={this.handleChange}
-          ref="email"/>
+          onChange={this.handleChange} 
+          ref="email"/> : null }
         <input
           type="text"
           value={this.state.password}
           placeholder="enter password here"
           onChange={this.handleChange}
           ref="password"/>
-        <button onClick={registerUser.bind(this, {
+        { this.props.showRegister ? 
+                <button onClick={registerUser.bind(this, {
                             username: this.state.username, 
                             password: this.state.password,
-                            email: this.state.email })}>
-          Register
-        </button>
+                            email: this.state.email })}> Register </button> :
+                <button onClick={loginUser.bind(this, {
+                            username: this.state.username, 
+                            password: this.state.password})}> Login </button>
+              }
       </div>
     )
   }

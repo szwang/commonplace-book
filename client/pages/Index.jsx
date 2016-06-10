@@ -32,9 +32,11 @@ class Index extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { notes } = state;
+  const { notes, accounts } = state;
+  console.log(notes, accounts)
   return { 
-    notes 
+    notes,
+    accounts
   }
 }
 

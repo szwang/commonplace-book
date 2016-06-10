@@ -1,7 +1,6 @@
 from app import db, login_manager
 from .cp_book import User
 
-
 @login_manager.user_loader
 def load_account(user_id):
     return User.query.get(user_id)
@@ -25,7 +24,6 @@ def validate_registration(username, email):
 
 
 def register_user(username, email, password):
-
     user = User(
         username=username,
         email=email,
