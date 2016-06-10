@@ -54,7 +54,7 @@ export function logoutUser(data) {
       type: actionTypes.LOGOUT_USER
     });
 
-    console.log(data)
+    console.log('in logout user', data)
 
     try {
       const result = await post('/api/auth/logout', data);

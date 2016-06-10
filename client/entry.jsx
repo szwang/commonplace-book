@@ -29,10 +29,12 @@ const history = syncHistoryWithStore(browserHistory, store)
 
 const cookies = cookie.parse(document.cookie)
 
-function requireAuth(nextState, replaceState) {
-  if (!!cookies.user_id)
-    replaceState({ nextPathname: nextState.location.pathname }, '/auth')
+function requireAuth(nextState, replace) {
+  console.log('cookies ', !!cookies.user_id)
+  if (!cookies.user_id)
+    replace('/auth')
 }
+
 
 ReactDOM.render(
   <Provider store={store}>

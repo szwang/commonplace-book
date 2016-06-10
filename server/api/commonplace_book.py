@@ -113,11 +113,15 @@ class SignupAPI(Resource):
 
 logoutParser = reqparse.RequestParser()
 logoutParser.add_argument('username')
+logoutParser.add_argument('id')
 
 @cp_book_api.resource('/auth/logout')
 class LogoutAPI(Resource):
 
   def post(self):
+    args = logoutParser.parse_args()
+    print args
+    
     logout_user()
     response = jsonify({
       'status': 'success',

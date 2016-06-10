@@ -3,6 +3,7 @@ import NoteContainer from '../containers/NoteContainer';
 import AddNote from '../components/AddNote';
 import { connect } from 'react-redux';
 import { requestNotes } from '../actions/notes';
+import { Link } from 'react-router';
 
 const indexStyle = {
   width: '100%',
@@ -18,26 +19,29 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(requestNotes());
   }
 
   render() {
+    const { id } = this.props.accounts;
+    console.log('user_id', id)
+
     return (
-      <div style={indexStyle}>
-        <NoteContainer />
+      <div>
+        <div>Hello World</div>
+        { id ? <Link to='/notebook'>Notebook</Link> :
+            <Link to='/auth'>Login/Register</Link> }
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  const { notes, accounts } = state;
-  console.log(notes, accounts)
+  const { accounts } = state;
+  console.log(accounts)
   return { 
-    notes,
     accounts
   }
 }
+
 
 export default connect(mapStateToProps)(Index);
