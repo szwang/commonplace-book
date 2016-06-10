@@ -14,15 +14,17 @@ class AuthPage extends Component {
   }
 
   toggleAuth() {
+    console.log('in oggle autho', this.state.registerUser)
     this.setState({ registerUser: !this.state.registerUser})
   }
 
   render() {
 
     return (
+      <div>
       <div onClick={this.toggleAuth.bind(this)}>
-        {this.state.registerUser ? <div>Switch to login</div> 
-          : <div>Switch to register</div> }
+        {this.state.registerUser ? <span>Switch to login </span>
+          : <span>Switch to register </span>}</div>
         <AuthBox {...this.props} showRegister={this.state.registerUser} />
       </div>
     );

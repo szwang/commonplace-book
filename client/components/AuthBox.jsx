@@ -17,15 +17,23 @@ class AuthBox extends Component {
       email:'',
       password: ''
     }
-
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange() {
+  handleUsernameChange() {
     this.setState({ 
-      username: this.refs.username.value,
-      email: this.refs.email.value,
+      username: this.refs.username.value
+    })
+  }
+
+  handlePasswordChange() {
+    this.setState({ 
       password: this.refs.password.value 
+    })
+  }
+
+  handleEmailChange() {
+    this.setState({ 
+      email: this.refs.email.value 
     })
   }
 
@@ -38,19 +46,19 @@ class AuthBox extends Component {
           type="text"
           value={this.state.username}
           placeholder="enter username here"
-          onChange={this.handleChange}
+          onChange={this.handleUsernameChange.bind(this)}
           ref="username" />
         { this.props.showRegister ? <input
           type="text"
           value={this.state.email}
           placeholder="enter email here"
-          onChange={this.handleChange} 
+          onChange={this.handleEmailChange.bind(this)} 
           ref="email"/> : null }
         <input
           type="text"
           value={this.state.password}
           placeholder="enter password here"
-          onChange={this.handleChange}
+          onChange={this.handlePasswordChange.bind(this)}
           ref="password"/>
         { this.props.showRegister ? 
                 <button onClick={registerUser.bind(this, {
