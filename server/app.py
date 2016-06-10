@@ -15,6 +15,8 @@ def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
+    app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
+    
     app.register_blueprint(cp_book_api.blueprint, url_prefix='/api')
     app.register_blueprint(index_view)
 

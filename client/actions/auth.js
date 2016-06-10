@@ -15,7 +15,6 @@ export function loginUser() {
 
     try {
       const result = await post('/api/auth/login', data);
-
       dispatch({
         type: actionTypes.LOGIN_USER_SUCCESS
       })
@@ -37,7 +36,7 @@ export function registerUser(data) {
 
     try {
       const result = await post('/api/auth/signup', data);
-
+      console.log(data)
       dispatch({
         type: actionTypes.REGISTER_USER_SUCCESS
       })

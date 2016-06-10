@@ -8,11 +8,13 @@ def load_account(user_id):
 
 def validate_registration(username, email):
     matching_email = User.query.filter_by(email=email).first()
+    print 'matching email', matching_email
     result = {}
     if matching_email:
         result['email'] = 'Account with e-mail already exists'
 
     matching_username = User.query.filter_by(username=username).first()
+    print 'matching username', matching_username
     if matching_username:
         result['username'] = 'Account with username already exists'
 
@@ -23,6 +25,7 @@ def validate_registration(username, email):
 
 
 def register_user(username, email, password):
+
     user = User(
         username=username,
         email=email,

@@ -53,7 +53,10 @@ class AuthBox extends Component {
           placeholder="enter password here"
           onChange={this.handleChange}
           ref="password"/>
-        <button onClick={registerUser.bind(this, {username: this.state.username, password: this.state.password})}>
+        <button onClick={registerUser.bind(this, {
+                            username: this.state.username, 
+                            password: this.state.password,
+                            email: this.state.email })}>
           Register
         </button>
       </div>
