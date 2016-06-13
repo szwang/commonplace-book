@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import request, Blueprint, current_app
 from flask_restful import Api, Resource, reqparse
-from models import Note, User, Tag, register_user, validate_registration
+from models import Note, User, Tag, register_user, validate_registration, check_user_auth
 from flask_login import login_user, logout_user
 import bcrypt
 from datetime import timedelta, datetime
@@ -66,11 +66,29 @@ class LoginAPI(Resource):
     from app import db
 
     args = loginParser.parse_args()
-    # function to login user
+    username = args.get('username')
+    password = args.get('password').encode('utf-8')
 
-    print args.username, args.password
+    user, auth_status = check_user_auth(password, username=username)
 
-    return None, 204
+    print user, auth_status
+
+    if(auth_status):
+      login_user(user)
+      response = jsonify({
+        'status': 'success'
+      })
+
+      response.set_cookie('username', user.username, expires=datetime.utcnow() + COOKIE_DURATION, domain=None)
+      response.set_cookie('user_id', str(user.id), expires=datetime.utcnow() + COOKIE_DURATION, domain=None)
+      
+      return response
+
+    else: #username and password do not match
+      return jsonify({
+        'status': 'error'
+      }, status=401)
+
 
 signupParser = reqparse.RequestParser()
 signupParser.add_argument('username')
@@ -86,7 +104,7 @@ class SignupAPI(Resource):
     args = signupParser.parse_args()
     username = args.username
     password = args.password.encode('utf-8')
-    hashedpw = bcrypt.hashpw(password, bcrypt.gensalt())
+    hashedpw = bcrypt.hashpw(password, bcrypt.gensalt()).decode()
     email = args.email
 
     print username, hashedpw, email
@@ -121,8 +139,9 @@ class LogoutAPI(Resource):
   def post(self):
     args = logoutParser.parse_args()
     print args
-    
+
     logout_user()
+
     response = jsonify({
       'status': 'success',
       'message': 'You have been logged out.'

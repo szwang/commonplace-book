@@ -1,17 +1,11 @@
 import * as actionTypes from '../actionTypes/auth';
 import { get, post, del } from '../utils/api';
 
-export function loginUser() {
+export function loginUser(data) {
   return async dispatch => {
     dispatch({
       type: actionTypes.LOGIN_USER
     });
-
-    //test data
-    var data = {
-      username: 'suzanne',
-      password: '1234'
-    }
 
     try {
       const result = await post('/api/auth/login', data);
