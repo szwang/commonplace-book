@@ -2,6 +2,8 @@ import * as actionTypes from '../actionTypes/notes';
 import { get, post, del } from '../utils/api';
 
 export function addNote(data) {
+      console.log(data)
+
   return async dispatch => {
     dispatch({
       type: actionTypes.ADD_NOTE
@@ -23,14 +25,16 @@ export function addNote(data) {
   }
 }
 
-export function requestNotes() {
+export function requestNotes(userId) {
+  console.log('action: requestNotes', userId)
   return async dispatch => {
     dispatch({
-      type: actionTypes.REQUEST_NOTES
+      type: actionTypes.REQUEST_NOTES,
+      userId
     });
 
     try {
-      const result = await get('/api/cp-book');
+      const result = await get(`/api/allNotes/${userId}`);
       console.log(result)
       dispatch({
         type: actionTypes.REQUEST_NOTES_SUCCESS,

@@ -4,7 +4,8 @@ import Notes from '../components/Notes'
 
 const mapStateToProps = (state) => {
   return {
-    notes: state.notes
+    notes: state.notes,
+    accounts: state.accounts
   }
 }
 

@@ -14,6 +14,7 @@ cp_book_api = Api(Blueprint('cp_book_api', __name__))
 notesParser = reqparse.RequestParser()
 notesParser.add_argument('content')
 notesParser.add_argument('category')
+notesParser.add_argument('userId')
 
 @cp_book_api.resource('/cp-book')
 class NotesAPI(Resource):
@@ -32,7 +33,7 @@ class NotesAPI(Resource):
     from app import db
 
     args = notesParser.parse_args()
-    new_note = Note(content=args['content'], category=args['category'])
+    new_note = Note(content=args['content'], category=args['category'], user_id=args['userId'])
 
     db.session.add(new_note)
     db.session.commit()
@@ -43,6 +44,22 @@ class NotesAPI(Resource):
       'category': new_note.category,
       'created': new_note.created_at.isoformat() + 'Z'
     }
+
+@cp_book_api.resource('/allNotes/<int:user_id>')
+class AllNoteAPI(Resource):
+  @staticmethod
+  def get(user_id):
+    print 'in get method'
+    notes = Note.query.filter_by(user_id=user_id).all()
+
+    for note in notes:
+      print note
+
+    return [{
+      'id': note.id,
+      'content': note.content,
+      'category': note.category
+    } for note in notes]
 
 @cp_book_api.resource('/cp-book/<int:note_id>')
 class NoteAPI(Resource):

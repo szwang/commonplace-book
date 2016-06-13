@@ -11,12 +11,14 @@
       }
       body {
         overflow: auto;
+        font-family: 'Open Sans', sans-serif;
       }
       .root {
         width: 100%;
         height: 100%;
       }
     </style>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300italic' rel='stylesheet' type='text/css'>
     <title><%= htmlWebpackPlugin.options.title || 'Commonplace Book' %></title>
   </head>
   <body>

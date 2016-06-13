@@ -4,11 +4,19 @@ import { addNote } from '../actions/notes'
 import Modal from 'react-modal'
 
 const styles = {
-  overlay: {
-    backgroundColor: 'papayawhip'
+  modal: {
+    overlay: {
+      backgroundColor: 'papayawhip'
+    },
+    content: {
+      color: 'lightsteelblue'
+    }
   },
-  content: {
-    color: 'lightsteelblue'
+  input: {
+    marginBottom: '5px',
+    padding: '6px',
+    border: 'solid 1px #dcdcdc',
+    transition: 'box-shadow 0.3s, border 0.3s'
   }
 }
 
@@ -18,7 +26,8 @@ class AddNote extends React.Component {
 
     this.state = {
       content: '',
-      category: ''
+      category: '',
+      source: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,29 +47,32 @@ class AddNote extends React.Component {
     return (
       <div>
         <Modal
-          style={styles}
+          style={styles.modal}
           isOpen={this.props.open}
           onRequestClose={this.props.close}>
-          <h2>Enter a new note here</h2>
-          <div> <input 
+          <h2>Enter a new note here:</h2>
+          <div> Category: <input 
+            style={styles.input}
             type="text"
             value={this.state.category}
             placeholder="enter category here"
             onChange={this.handleChange}
             ref="category" /> </div>
-          <div> <textarea
+          <div> Content: <textarea
+            style={styles.input}
             type="text"
             value={this.state.content}
             placeholder="enter content here"
             onChange={this.handleChange}
             ref="content"> </textarea> </div>
-          <div> <input
+          <div> Source: <input
+            style={styles.input}
             type="text"
             value={this.state.source}
             placeholder="enter source here"
             onChange={this.handleChange}
             ref="source" /> </div>
-          <div> <button onClick={onAddNote.bind(this, this.state)}>
+          <div> <button onClick={onAddNote.bind(this, Object.assign({}, this.state, {userId: this.props.userId}))}>
             Add Note
           </button> </div>
         </Modal>

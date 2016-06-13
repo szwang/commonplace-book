@@ -37,26 +37,27 @@ class Notes extends Component {
   }
 
   render() {
-    const { notes, addNote, deleteNote } = this.props;
+    const { notes, accounts, addNote, deleteNote } = this.props;
 
     return (
       <div>
-        <h1>Suzanne's Commonplace Book</h1>
-        {!!notes.length &&
+        <h1>{accounts.username}'s Commonplace Book</h1>
           <div style={styles.basket}>
+        {!!notes.length &&
+          <div>
             {notes.map(note => (
               <Note 
                     key={`note-${note.id}`}
                     note={note}
                     onDeleteNote={deleteNote} />
-            ))}
-            <AddNote onAddNote={addNote} open={this.state.open} close={this.closeNotePad.bind(this)}/>
-            <div style={styles.addButton} onClick={this.showNotePad.bind(this)}> <PlusIcon /> </div>
-          </div>
+            ))} </div>
         }
         {!notes.length &&
           <h1>This book has no notes in it :(</h1>
         }
+          <AddNote userId={accounts.id} onAddNote={addNote} open={this.state.open} close={this.closeNotePad.bind(this)}/>
+          <div style={styles.addButton} onClick={this.showNotePad.bind(this)}> <PlusIcon /> </div>
+        </div>
       </div>
     )
   }

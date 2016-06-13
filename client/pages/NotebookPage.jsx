@@ -19,7 +19,7 @@ class NotebookPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.requestNotes();
+    this.props.requestNotes(this.props.accounts.id);
   }
 
   render() {
@@ -48,8 +48,8 @@ const mapDispatchToProps = (dispatch) => {
     logoutUser: (data) => {
       dispatch(logoutUser(data))
     },
-    requestNotes: () => {
-      dispatch(requestNotes())
+    requestNotes: (id) => {
+      dispatch(requestNotes(id))
     }
   }
 }
