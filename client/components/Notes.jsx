@@ -24,12 +24,16 @@ class Notes extends Component {
     super(props)
 
     this.state = {
-      showNotePad: false
+      open: false
     }
   }
 
   showNotePad() {
-    this.setState({ showNotePad: true })
+    this.setState({ open: true })
+  }
+
+  closeNotePad() {
+    this.setState({ open: false })
   }
 
   render() {
@@ -46,10 +50,8 @@ class Notes extends Component {
                     note={note}
                     onDeleteNote={deleteNote} />
             ))}
-          {this.state.showNotePad ? 
-            <AddNote onAddNote={addNote} /> : 
+            <AddNote onAddNote={addNote} open={this.state.open} close={this.closeNotePad.bind(this)}/>
             <div style={styles.addButton} onClick={this.showNotePad.bind(this)}> <PlusIcon /> </div>
-          }
           </div>
         }
         {!notes.length &&
