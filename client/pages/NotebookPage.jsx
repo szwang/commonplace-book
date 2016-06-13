@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import NoteContainer from '../containers/NoteContainer';
-import AddNote from '../components/AddNote';
+import Notes from '../components/Notes';
 import { connect } from 'react-redux';
 import { requestNotes } from '../actions/notes';
 import { logoutUser } from '../actions/auth';
+import { push } from 'react-router-redux';
 
 const notebookPageStyle = {
   width: '100%',
@@ -24,12 +25,16 @@ class NotebookPage extends React.Component {
 
   render() {
     const { logoutUser } = this.props;
-    const { id, username } = this.props.accounts;
+    const { id, username, logoutSuccess } = this.props.accounts;
+
+    if(logoutSuccess) {
+      push('/')
+    }
 
     return (
       <div style={notebookPageStyle}>
         <div onClick={logoutUser.bind(this, { id: id, username: username })}>Logout</div>
-        <NoteContainer />
+        <Notes {...this.props}/>
       </div>
     )
   }
@@ -37,24 +42,14 @@ class NotebookPage extends React.Component {
 
 function mapStateToProps(state) {
   const { notes, accounts } = state;
+
   return { 
     notes,
     accounts
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logoutUser: (data) => {
-      dispatch(logoutUser(data))
-    },
-    requestNotes: (id) => {
-      dispatch(requestNotes(id))
-    }
-  }
-}
-
 export default connect(
   mapStateToProps, 
-  mapDispatchToProps
+  { logoutUser, requestNotes, push }
 )(NotebookPage);

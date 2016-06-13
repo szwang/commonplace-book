@@ -22,6 +22,7 @@ import {
 } from '../actionTypes/auth';
 
 import cookie from 'cookie';
+import { push } from 'react-router-redux';
 
 // array of notes, with structure
 
@@ -30,29 +31,25 @@ const cookies = cookie.parse(document.cookie)
 const INITIAL_STATE = {
   id: cookies.user_id || '',
   username: cookies.username || '',
-  email: cookies.email || ''
+  email: cookies.email || '',
+  loginSuccess: false,
+  logoutSuccess: false
 }; 
 
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case REGISTER_USER_SUCCESS: 
-      console.log({...state})
-    
-      return {
-        ...state
-      }
+      return Object.assign({}, state, { loginSuccess: true });
 
     case LOGIN_USER_SUCCESS:
-      console.log({...state})
-      return {
-        ...state
-      }
+      return Object.assign({}, state, { loginSuccess: true })
 
     case LOGOUT_USER_SUCCESS:
       return {
         id: '',
         username: '',
-        email: ''
+        email: '',
+        logoutSuccess: true
       }
 
     default:

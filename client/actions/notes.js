@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes/notes';
 import { get, post, del } from '../utils/api';
+import { transitionTo } from 'react-router';
 
 export function addNote(data) {
       console.log(data)
@@ -16,6 +17,8 @@ export function addNote(data) {
         type: actionTypes.ADD_NOTE_SUCCESS,
         note: result
       });
+
+
     } catch(e) {
       console.log('error:', e)
       dispatch({

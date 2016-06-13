@@ -15,11 +15,12 @@ import promise from 'redux-promise';
 import cookie from 'cookie';
 
 import { Router, Route, browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 
 const createStoreWithMiddleware = applyMiddleware(
   thunk,
   promise,
+  routerMiddleware(browserHistory),
   createLogger()
 )(createStore);
 
@@ -28,6 +29,7 @@ const store = createStoreWithMiddleware(reducers);
 const history = syncHistoryWithStore(browserHistory, store)
 
 const cookies = cookie.parse(document.cookie)
+
 
 function requireAuth(nextState, replace) {
   console.log('cookies ', !!cookies.user_id)
@@ -40,8 +42,8 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={Index} />
-        <Route path="auth" component={AuthPage} />
-        <Route path="notebook" component={NotebookPage} onEnter={requireAuth} />
+        <Route path="/auth" component={AuthPage} />
+        <Route path="/notebook" component={NotebookPage} onEnter={requireAuth} />
     </Router>
   </Provider>,
   document.getElementById('root')

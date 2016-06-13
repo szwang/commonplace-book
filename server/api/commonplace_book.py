@@ -168,11 +168,4 @@ class LogoutAPI(Resource):
     response.set_cookie('user_id', '', expires=0, domain=None)
     return response
 
-    # print args.username, args.password
-    # new_user = User(username=args.username, password=args.password)
-
-    # db.session.add(new_user)
-    # db.session.commit()
-
-    # return None, 204
 

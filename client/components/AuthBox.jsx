@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { push, browserHistory } from 'react-router-redux';
+import { loginUser, registerUser } from '../actions/auth';
 
 const styles = {
   form: {
@@ -17,6 +19,8 @@ class AuthBox extends Component {
       email:'',
       password: ''
     }
+
+    this.onClick = this.onClick.bind(this);
   }
 
   handleUsernameChange() {
@@ -37,9 +41,23 @@ class AuthBox extends Component {
     })
   }
 
+  onClick() {
+    const { registerUser, loginUser } = this.props;
+
+    if(this.props.showRegister) {
+      registerUser(this.state);
+    } else {
+      loginUser(this.state);
+    }
+  }
+
   render() {
-    const { loginUser, registerUser, showRegister } = this.props;
-        
+    const { loginSuccess, showRegister, push } = this.props;
+    
+    if(loginSuccess) {
+      push('/notebook')
+    } 
+
     return (
       <div style={styles.form}>
         <input 
@@ -61,17 +79,32 @@ class AuthBox extends Component {
           onChange={this.handlePasswordChange.bind(this)}
           ref="password"/>
         { this.props.showRegister ? 
-                <button onClick={registerUser.bind(this, {
-                            username: this.state.username, 
-                            password: this.state.password,
-                            email: this.state.email })}> Register </button> :
-                <button onClick={loginUser.bind(this, {
-                            username: this.state.username, 
-                            password: this.state.password})}> Login </button>
+                <button onClick={this.onClick}> Register </button> :
+                <button onClick={this.onClick}> Login </button>
               }
       </div>
     )
   }
 }
 
-export default AuthBox;
+const mapStateToProps = (dispatch) => {
+  return {
+
+  }
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     loginUser: (data) => {
+//       dispatch(loginUser(data))
+//     },
+//     registerUser: (data) => {
+//       dispatch(registerUser(data))
+//     },
+//     push: (route) => {
+//       dispatch(push(route))
+//     }
+//   }
+// }
+
+export default connect(mapStateToProps, { loginUser, registerUser, push })(AuthBox);

@@ -31,7 +31,7 @@ def register_user(username, email, password):
   )
   db.session.add(user)
   db.session.commit()
-  return user  # Not turning to dictionary because of flask-login
+  return user  
 
 def check_user_auth(password, username=None):
   print 'in check user auth', password, username
@@ -41,7 +41,6 @@ def check_user_auth(password, username=None):
     user = User.query.filter_by(username=username).first()
     print 'found user'
   if user:
-    # encodedpw = user.password.encode('utf-8')
     if bcrypt.hashpw(password, user.password.encode('utf-8')).decode() == user.password:
       print 'password matches'
       return user, True 

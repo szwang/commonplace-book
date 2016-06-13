@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser, registerUser } from '../actions/auth';
 import AuthBox from '../components/AuthBox';
 
 
@@ -14,42 +13,31 @@ class AuthPage extends Component {
   }
 
   toggleAuth() {
-    console.log('in oggle autho', this.state.registerUser)
     this.setState({ registerUser: !this.state.registerUser})
   }
 
   render() {
+    const { authSuccess } = this.props.accounts;
+    console.log('authSuccess:', authSuccess)
 
     return (
       <div>
       <div onClick={this.toggleAuth.bind(this)}>
         {this.state.registerUser ? <span>Switch to login </span>
           : <span>Switch to register </span>}</div>
-        <AuthBox {...this.props} showRegister={this.state.registerUser} />
+        <AuthBox authSuccess={authSuccess} showRegister={this.state.registerUser} />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
+  const { accounts } = state;
   return {
-    auth: state.auth
+    accounts
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loginUser: (data) => {
-      dispatch(loginUser(data))
-    },
-    registerUser: (data) => {
-      dispatch(registerUser(data))
-    }
-  }
-}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AuthPage);
+export default connect(mapStateToProps)(AuthPage);
 

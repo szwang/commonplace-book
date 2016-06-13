@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes/auth';
 import { get, post, del } from '../utils/api';
+import { transitionTo } from 'react-router';
 
 export function loginUser(data) {
   return async dispatch => {
