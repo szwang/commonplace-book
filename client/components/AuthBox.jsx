@@ -15,6 +15,19 @@ const styles = {
     fontSize: '20px',
     width: '200px',
     marginBottom: '10px'
+  },
+  button: {
+    height: '30px',
+    fontSize: '15px',
+    borderRadius: '5px',
+    color: '#7d4627',
+    backgroundColor: '#c9d8c5',
+    marginTop: '10px',
+    width: '80px',
+    cursor: 'pointer',
+    /* box-shadow: none, */
+    /* text-shadow: none, */
+    border: 'none'
   }
 };
 
@@ -89,10 +102,8 @@ class AuthBox extends Component {
           value={this.state.password}
           onChange={this.handlePasswordChange.bind(this)}
           ref="password"/></div></div>
-        { this.props.showRegister ? 
-                <button onClick={this.onClick}> Register </button> :
-                <button onClick={this.onClick}> Login </button>
-              }
+          <button style={styles.button} onClick={this.onClick}>
+            { this.props.showRegister ? <span>Register</span> : <span>Login</span> } </button>
       </div>
     )
   }

@@ -28,6 +28,7 @@ const styles = {
     cursor: 'pointer',
     color: '#e2e6e9'
   }
+
 }
 
 class AuthPage extends Component {
