@@ -41,8 +41,13 @@ class AddNote extends React.Component {
     })
   }
 
+  onClick() {
+    const { onAddNote, userId } = this.props;
+    
+    onAddNote(Object.assign({}, this.state, { userId: userId }))
+  }
+
   render() {
-  const { onAddNote } = this.props;
 
     return (
       <div>
@@ -72,7 +77,7 @@ class AddNote extends React.Component {
             placeholder="enter source here"
             onChange={this.handleChange}
             ref="source" /> </div>
-          <div> <button onClick={onAddNote.bind(this, Object.assign({}, this.state, {userId: this.props.userId}))}>
+          <div> <button onClick={this.onClick.bind(this)}>
             Add Note
           </button> </div>
         </Modal>

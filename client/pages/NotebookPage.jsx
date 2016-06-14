@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NoteContainer from '../containers/NoteContainer';
 import Notes from '../components/Notes';
 import { connect } from 'react-redux';
-import { requestNotes } from '../actions/notes';
+import { requestNotes, addNote } from '../actions/notes';
 import { logoutUser } from '../actions/auth';
 import { push } from 'react-router-redux';
 
@@ -51,5 +51,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps, 
-  { logoutUser, requestNotes, push }
+  { addNote, logoutUser, requestNotes, push }
 )(NotebookPage);
