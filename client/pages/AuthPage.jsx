@@ -9,16 +9,27 @@ const styles = {
     width: '100%',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#a8b6bf'
   },
   container: {
-
+    color: '#7d4627',
+    marginBottom: '150px'
   },
-  loginRegister: {
-    marginBottom: '30px',
-    fontSize: '30px'
+  loginRegisterContainer: {
+    marginBottom: '30px'
+  },
+  loginRegisterActive: {
+    fontSize: '30px',
+    fontWeight: '900'
+  },
+  loginRegisterDormant: {
+    fontSize: '25px',
+    cursor: 'pointer',
+    color: '#e2e6e9'
   }
 }
+
 class AuthPage extends Component {
   constructor(props) {
     super(props)
@@ -53,8 +64,12 @@ class AuthPage extends Component {
 
     return (
       <div style={styles.page}>
-      <div>{this.state.registerUser ? <div><a onClick={this.toggleAuth}>LOGIN</a> / REGISTER</div>
-        : <div>LOGIN / <a onClick={this.toggleAuth}>REGISTER</a></div>}
+      <div style={styles.container}>
+      <div style={styles.loginRegisterContainer}>
+        {this.state.registerUser ? 
+          <div><a style={styles.loginRegisterDormant} onClick={this.toggleAuth}>LOGIN / </a><span style={styles.loginRegisterActive}>REGISTER</span></div>
+        : <div><span style={styles.loginRegisterActive}>LOGIN</span><a style={styles.loginRegisterDormant} onClick={this.toggleAuth}> / REGISTER</a></div>}
+      </div>
         <AuthBox {...this.props} showRegister={this.state.registerUser} /></div>
       </div>
     );
