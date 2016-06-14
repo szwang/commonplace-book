@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AuthBox from '../components/AuthBox';
+import { push } from 'react-router-redux';
 
 
 class AuthPage extends Component {
@@ -10,6 +11,21 @@ class AuthPage extends Component {
     this.state = {
       registerUser: true
     }
+
+    this.toggleAuth = this.toggleAuth.bind(this);
+  }
+
+  componentDidMount() {
+    this.ensureNotLoggedIn(this.props); 
+  }
+
+  ensureNotLoggedIn(props) {
+    const { push } = props;
+    const { isAuthenticated } = props.accounts;
+
+    if(isAuthenticated) {
+      push('/notebook');
+    }
   }
 
   toggleAuth() {
@@ -17,15 +33,17 @@ class AuthPage extends Component {
   }
 
   render() {
-    const { authSuccess } = this.props.accounts;
-    console.log('authSuccess:', authSuccess)
+    const { push } = this.props;
+    const { isAuthenticated } = this.props.accounts;
+
+    if(isAuthenticated) {
+    }
 
     return (
       <div>
-      <div onClick={this.toggleAuth.bind(this)}>
-        {this.state.registerUser ? <span>Switch to login </span>
-          : <span>Switch to register </span>}</div>
-        <AuthBox authSuccess={authSuccess} showRegister={this.state.registerUser} />
+      {this.state.registerUser ? <div><a onClick={this.toggleAuth}>Login</a>/Register</div>
+        : <div>Login/<a onClick={this.toggleAuth}>Register</a></div>}
+        <AuthBox {...this.props} showRegister={this.state.registerUser} />
       </div>
     );
   }
@@ -38,6 +56,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-
-export default connect(mapStateToProps)(AuthPage);
+export default connect(mapStateToProps, { push })(AuthPage);
 

@@ -23,17 +23,20 @@ class NotebookPage extends React.Component {
     this.props.requestNotes(this.props.accounts.id);
   }
 
-  render() {
+  onClickLogout() {
     const { logoutUser } = this.props;
-    const { id, username, logoutSuccess } = this.props.accounts;
+    const { id, username } = this.props.accounts;
+    logoutUser({
+      id: id,
+      username: username
+    })
+  }
 
-    if(logoutSuccess) {
-      push('/')
-    }
+  render() {
 
     return (
       <div style={notebookPageStyle}>
-        <div onClick={logoutUser.bind(this, { id: id, username: username })}>Logout</div>
+        <div onClick={this.onClickLogout.bind(this)}>Logout</div>
         <Notes {...this.props}/>
       </div>
     )

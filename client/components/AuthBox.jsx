@@ -5,8 +5,16 @@ import { loginUser, registerUser } from '../actions/auth';
 
 const styles = {
   form: {
-    marginTop: '200px',
-    marginLeft: '500px'
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column'
+  },
+  inputField: {
+    height: '25px',
+    fontSize: '20px',
+    width: '200px',
+    marginBottom: '10px'
   }
 };
 
@@ -42,7 +50,7 @@ class AuthBox extends Component {
   }
 
   onClick() {
-    const { registerUser, loginUser } = this.props;
+    const { registerUser, loginUser, push } = this.props;
 
     if(this.props.showRegister) {
       registerUser(this.state);
@@ -60,24 +68,27 @@ class AuthBox extends Component {
 
     return (
       <div style={styles.form}>
-        <input 
+      <div><div>Username</div>
+        <div><input 
+          style={styles.inputField}
           type="text"
           value={this.state.username}
-          placeholder="enter username here"
           onChange={this.handleUsernameChange.bind(this)}
-          ref="username" />
-        { this.props.showRegister ? <input
-          type="text"
-          value={this.state.email}
-          placeholder="enter email here"
-          onChange={this.handleEmailChange.bind(this)} 
-          ref="email"/> : null }
-        <input
-          type="text"
+          ref="username" /></div></div>
+      { this.props.showRegister ? <div><div>Email</div>
+        <div><input
+        style={styles.inputField}
+        type="text"
+        value={this.state.email}
+        onChange={this.handleEmailChange.bind(this)} 
+          ref="email"/></div></div> : null }
+      <div><div>Password</div>
+        <div><input
+          style={styles.inputField}
+          type="password"
           value={this.state.password}
-          placeholder="enter password here"
           onChange={this.handlePasswordChange.bind(this)}
-          ref="password"/>
+          ref="password"/></div></div>
         { this.props.showRegister ? 
                 <button onClick={this.onClick}> Register </button> :
                 <button onClick={this.onClick}> Login </button>

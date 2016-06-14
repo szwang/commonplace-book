@@ -32,24 +32,23 @@ const INITIAL_STATE = {
   id: cookies.user_id || '',
   username: cookies.username || '',
   email: cookies.email || '',
-  loginSuccess: false,
-  logoutSuccess: false
+  isAuthenticated: !!cookies.user_id
 }; 
 
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case REGISTER_USER_SUCCESS: 
-      return Object.assign({}, state, { loginSuccess: true });
+      return Object.assign({}, state, { isAuthenticated: true });
 
     case LOGIN_USER_SUCCESS:
-      return Object.assign({}, state, { loginSuccess: true })
+      return Object.assign({}, state, { isAuthenticated: true });
 
     case LOGOUT_USER_SUCCESS:
       return {
         id: '',
         username: '',
         email: '',
-        logoutSuccess: true
+        isAuthenticated: false
       }
 
     default:

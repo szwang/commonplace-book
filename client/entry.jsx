@@ -30,13 +30,10 @@ const history = syncHistoryWithStore(browserHistory, store)
 
 const cookies = cookie.parse(document.cookie)
 
-
 function requireAuth(nextState, replace) {
-  console.log('cookies ', !!cookies.user_id)
   if (!cookies.user_id)
     replace('/auth')
 }
-
 
 ReactDOM.render(
   <Provider store={store}>
@@ -48,3 +45,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+

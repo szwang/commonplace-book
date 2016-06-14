@@ -9,10 +9,6 @@
     "dist": "NODE_ENV=production webpack -p",
     "postinstall": "npm run dist"
   },
-  "engines": {
-    "node": "0.10",
-    "npm": "2.10"
-  },
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "6.3.14",
