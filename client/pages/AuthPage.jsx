@@ -3,7 +3,22 @@ import { connect } from 'react-redux';
 import AuthBox from '../components/AuthBox';
 import { push } from 'react-router-redux';
 
+const styles = {
+  page: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  container: {
 
+  },
+  loginRegister: {
+    marginBottom: '30px',
+    fontSize: '30px'
+  }
+}
 class AuthPage extends Component {
   constructor(props) {
     super(props)
@@ -36,14 +51,11 @@ class AuthPage extends Component {
     const { push } = this.props;
     const { isAuthenticated } = this.props.accounts;
 
-    if(isAuthenticated) {
-    }
-
     return (
-      <div>
-      {this.state.registerUser ? <div><a onClick={this.toggleAuth}>Login</a>/Register</div>
-        : <div>Login/<a onClick={this.toggleAuth}>Register</a></div>}
-        <AuthBox {...this.props} showRegister={this.state.registerUser} />
+      <div style={styles.page}>
+      <div>{this.state.registerUser ? <div><a onClick={this.toggleAuth}>LOGIN</a> / REGISTER</div>
+        : <div>LOGIN / <a onClick={this.toggleAuth}>REGISTER</a></div>}
+        <AuthBox {...this.props} showRegister={this.state.registerUser} /></div>
       </div>
     );
   }
