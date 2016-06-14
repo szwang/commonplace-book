@@ -1,7 +1,5 @@
 node_modules
 venv/
 .env
-server/static/scripts/
-server/templates/
 dev/
 *.log
