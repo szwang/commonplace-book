@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import NoteContainer from '../containers/NoteContainer';
 import AddNote from '../components/AddNote';
 import { connect } from 'react-redux';
 import { requestNotes } from '../actions/notes';
