@@ -15,4 +15,4 @@ const createStoreWithMiddleware = applyMiddleware(
 
 const store = createStoreWithMiddleware(reducers);
 
-export default store
+export default store;

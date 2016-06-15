@@ -13,20 +13,21 @@ const styles = {
   inputField: {
     height: '25px',
     fontSize: '20px',
-    width: '200px',
-    marginBottom: '10px'
+    width: '250px',
+    marginBottom: '10px',
+    padding: '5px 5px 5px 10px',
+    borderRadius: '3px',
+    border: 'none'
   },
   button: {
-    height: '30px',
+    height: '40px',
     fontSize: '15px',
     borderRadius: '5px',
     color: '#7d4627',
     backgroundColor: '#c9d8c5',
     marginTop: '10px',
-    width: '80px',
+    width: '90px',
     cursor: 'pointer',
-    /* box-shadow: none, */
-    /* text-shadow: none, */
     border: 'none'
   }
 };

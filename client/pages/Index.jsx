@@ -5,6 +5,28 @@ import { connect } from 'react-redux';
 import { requestNotes } from '../actions/notes';
 import { Link } from 'react-router';
 
+const styles = {
+  page: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#a8b6bf'
+  },
+  landingButton: {
+    height: '80px',
+    fontSize: '25px',
+    borderRadius: '5px',
+    color: '#7d4627',
+    backgroundColor: '#c9d8c5',
+    marginTop: '10px',
+    width: '180px',
+    cursor: 'pointer',
+    border: 'none'
+  }
+}
+
 const indexStyle = {
   width: '100%',
   display: 'flex',
@@ -23,13 +45,11 @@ class Index extends React.Component {
 
   render() {
     const { id } = this.props.accounts;
-    console.log('user_id', id)
 
     return (
-      <div>
-        <div>Hello World</div>
-        { id ? <Link to='/notebook'>Notebook</Link> :
-            <Link to='/auth'>Login/Register</Link> }
+      <div style={styles.page}>
+        { id ? <Link to='/notebook'><button style={styles.landingButton}>Notebook</button></Link> :
+            <Link to='/auth'><button style={styles.landingButton}>Login/Register</button></Link> }
       </div>
     )
   }

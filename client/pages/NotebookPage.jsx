@@ -6,13 +6,15 @@ import { requestNotes, addNote } from '../actions/notes';
 import { logoutUser } from '../actions/auth';
 import { push } from 'react-router-redux';
 
-const notebookPageStyle = {
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  backgroundColor: '#edd9c0',
-  color: '#7d4627',
-  paddingLeft: '20px'
+const styles = {
+  notebookPage: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    backgroundColor: '#edd9c0',
+    color: '#7d4627',
+    paddingLeft: '20px'
+  }
 }
 
 class NotebookPage extends React.Component {
@@ -36,7 +38,7 @@ class NotebookPage extends React.Component {
   render() {
 
     return (
-      <div style={notebookPageStyle}>
+      <div style={styles.notebookPage}>
         <div onClick={this.onClickLogout.bind(this)}>Logout</div>
         <Notes {...this.props}/>
       </div>

@@ -13,18 +13,18 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
 import cookie from 'cookie';
-
+import store from './store/configureStore';
 import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 
-const createStoreWithMiddleware = applyMiddleware(
-  thunk,
-  promise,
-  routerMiddleware(browserHistory),
-  createLogger()
-)(createStore);
+// const createStoreWithMiddleware = applyMiddleware(
+//   thunk,
+//   promise,
+//   routerMiddleware(browserHistory),
+//   createLogger()
+// )(createStore);
 
-const store = createStoreWithMiddleware(reducers);
+// const store = createStoreWithMiddleware(reducers);
 
 const history = syncHistoryWithStore(browserHistory, store)
 

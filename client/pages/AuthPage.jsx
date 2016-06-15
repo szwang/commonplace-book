@@ -26,7 +26,7 @@ const styles = {
   loginRegisterDormant: {
     fontSize: '25px',
     cursor: 'pointer',
-    color: '#e2e6e9'
+    color: '#c4ced4'
   }
 
 }
