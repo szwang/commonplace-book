@@ -9,7 +9,6 @@ const styles = {
   notebookPage: {
     width: '100%',
     height: '100%',
-    display: 'flex',
     backgroundColor: '#edd9c0',
     color: '#7d4627',
     paddingLeft: '20px'

@@ -4,7 +4,7 @@ import AddNote from './AddNote';
 import PlusIcon from '../svg/add.svg';
 
 const styles = {
-  basket: {
+  notesContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignSelf: 'stretch',
@@ -42,9 +42,8 @@ class Notes extends Component {
     return (
       <div>
         <h1>{accounts.username}'s Commonplace Book</h1>
-          <div style={styles.basket}>
         {!!notes.length &&
-          <div>
+          <div style={styles.notesContainer}>
             {notes.map(note => (
               <Note 
                     key={`note-${note.id}`}
@@ -57,7 +56,6 @@ class Notes extends Component {
         }
           <AddNote userId={accounts.id} onAddNote={addNote} open={this.state.open} close={this.closeNotePad.bind(this)}/>
           <div style={styles.addButton} onClick={this.showNotePad.bind(this)}> <PlusIcon /> </div>
-        </div>
       </div>
     )
   }

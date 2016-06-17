@@ -6,13 +6,16 @@ const styles = {
     maxWidth: '100px',
     overflow: 'hidden',
     maxHeight: '200px'
+  },
+  noteContainer: {
+    width: '300px',
+    height: '200px'
   }
 }
 
 const Note = ({ onDeleteNote, note }) => (
   <div style={styles.note}>
-    <div>
-      <div><NoteIcon /></div>
+    <div style={styles.noteContainer}>
       <div>Note #{note.id}</div>
       <div>{note.content}</div>
     </div>
