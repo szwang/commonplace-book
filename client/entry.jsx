@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import Index from './pages/Index';
 import AuthPage from './pages/AuthPage';
 import NotebookPage from './pages/NotebookPage';
+import DragPage from './pages/DragPage';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
@@ -54,6 +55,7 @@ ReactDOM.render(
       <Route path="/" component={Index} />
         <Route path="/auth" component={requireLoggedOut(AuthPage)} />
         <Route path="/notebook" component={requireAuthentication(NotebookPage)} />
+        <Route path="/drag" component={DragPage} />
     </Router>
   </Provider>,
   document.getElementById('root')
