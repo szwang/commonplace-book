@@ -1,7 +1,8 @@
 import {
   ADD_NOTE_SUCCESS,
   REQUEST_NOTES_SUCCESS,
-  DELETE_NOTE_SUCCESS
+  DELETE_NOTE_SUCCESS,
+  MOVE_NOTE
 } from '../actionTypes/notes';
 
 // array of notes, with structure
@@ -40,6 +41,17 @@ const notes = (state = INITIAL_STATE, action) => {
     case DELETE_NOTE_SUCCESS:
       return state.filter((note) => {
         return note.id != action.noteId
+      })
+
+    case MOVE_NOTE:
+      return state.map((val, key) => {
+        if(val.id === action.noteId) {
+          console.log('found move', val.id, action.noteId)
+          console.log(Object.assign(val, { top: action.top, left: action.left }))
+          return Object.assign(val, { top: action.top, left: action.left })
+        } else {
+          return val;
+        }
       })
 
     default:

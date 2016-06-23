@@ -9,3 +9,6 @@ export const ADD_NOTE_ERROR = 'ADD_NOTE_ERROR';
 export const DELETE_NOTE = 'DELETE_NOTE';
 export const DELETE_NOTE_SUCCESS = 'DELETE_NOTE_SUCCESS';
 export const DELETE_NOTE_ERROR = 'DELETE_NOTE_ERROR';
+
+export const MOVE_NOTE = 'MOVE_NOTE';
+

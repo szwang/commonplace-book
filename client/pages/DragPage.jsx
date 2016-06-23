@@ -5,7 +5,7 @@ import DragPanel from '../components/DragPanel';
 import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { connect } from 'react-redux';
-import { requestNotes } from '../actions/notes';
+import { requestNotes, moveNote } from '../actions/notes';
 
 
 const styles = {
@@ -22,6 +22,7 @@ const boxTarget = {
     const left = Math.round(item.left + delta.x);
     const top = Math.round(item.top + delta.y);
 
+    console.log(item, item.id)
     component.moveBox(item.id, left, top);
   }
 };
@@ -48,7 +49,9 @@ class DragPage extends Component {
   }
 
   moveBox(id, left, top) {
-    const { notes } = this.props;
+    const { notes, moveNote } = this.props;
+
+    moveNote(id, left, top)
 
     // this.setState(update(notes, {
     //   notes: {
@@ -74,11 +77,11 @@ class DragPage extends Component {
           console.log(key, val)
           return (
             <DraggableNote key={key}
-                id={key}
-                left={ Math.floor((Math.random() * 900) + 1)}
-                top={ Math.floor((Math.random() * 400) + 1)}>
-            {val.category}
-            {val.content}
+                id={val.id}
+                left={val.left}
+                top={val.top}>
+            <div>{val.category}</div>
+            <div>{val.content}</div>
             </DraggableNote>
           )
         })}
@@ -96,4 +99,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { requestNotes })(DragPage)
+export default connect(mapStateToProps, { requestNotes, moveNote })(DragPage)

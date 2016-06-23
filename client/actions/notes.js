@@ -73,3 +73,17 @@ export function deleteNote(noteId) {
     }
   }
 }
+
+export function moveNote(noteId, left, top) {
+  console.log('in move note', noteId, left, top)
+  return dispatch => {
+    dispatch({
+      type: actionTypes.MOVE_NOTE,
+      noteId,
+      left,
+      top
+    })
+  }
+}
+
+
