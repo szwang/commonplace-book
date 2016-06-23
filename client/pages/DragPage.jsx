@@ -5,6 +5,8 @@ import DragPanel from '../components/DragPanel';
 import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { connect } from 'react-redux';
+import { requestNotes } from '../actions/notes';
+
 
 const styles = {
   width: '100%',
@@ -37,40 +39,48 @@ class DragPage extends Component {
         'b': { top: 90, left: 20, title: 'Drag me too' }
       }
     };
+  }
 
-    const { notes } = this.props;
-    console.log('in drag page', notes)
+  componentDidMount() {
+    const { requestNotes, accounts } = this.props;
+
+    requestNotes(accounts.id);
   }
 
   moveBox(id, left, top) {
-    this.setState(update(this.state, {
-      notes: {
-        [id]: {
-          $merge: {
-            left: left,
-            top: top
-          }
-        }
-      }
-    }));
+    const { notes } = this.props;
+
+    // this.setState(update(notes, {
+    //   notes: {
+    //     [id]: {
+    //       $merge: {
+    //         left: left,
+    //         top: top
+    //       }
+    //     }
+    //   }
+    // }));
   }
 
   render() {
+    const { notes, accounts } = this.props;
+    console.log('in drag page', notes, accounts)
     const { connectDropTarget } = this.props;
-    const { notes} = this.state;
 
     return connectDropTarget(
       <div style={styles}>
-        {Object.keys(notes).map(key => {
-          const { left, top, title } = notes[key];
+
+        {notes.map((val, key) => {
+          console.log(key, val)
           return (
             <DraggableNote key={key}
-                 id={key}
-                 left={left}
-                 top={top}>
-              {title}
+                id={key}
+                left={ Math.floor((Math.random() * 900) + 1)}
+                top={ Math.floor((Math.random() * 400) + 1)}>
+            {val.category}
+            {val.content}
             </DraggableNote>
-          );
+          )
         })}
       </div>
     );
@@ -86,4 +96,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {})(DragPage)
+export default connect(mapStateToProps, { requestNotes })(DragPage)

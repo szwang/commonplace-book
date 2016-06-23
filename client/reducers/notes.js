@@ -27,7 +27,15 @@ const notes = (state = INITIAL_STATE, action) => {
       ]
 
     case REQUEST_NOTES_SUCCESS:
-      return action.notes
+      return action.notes.map((val, key) => {
+        if(!val.top) {
+          val.top = Math.floor((Math.random() * 400) + 1)
+        }
+        if(!val.left) {
+          val.left = Math.floor((Math.random() * 900) + 1)
+        }
+        return val;
+      })
 
     case DELETE_NOTE_SUCCESS:
       return state.filter((note) => {
