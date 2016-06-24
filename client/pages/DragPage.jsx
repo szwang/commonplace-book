@@ -9,10 +9,18 @@ import { requestNotes, moveNote } from '../actions/notes';
 
 
 const styles = {
-  width: '100%',
-  height: '100%',
-  border: '1px solid black',
-  position: 'relative'
+  card: {
+    width: '100%',
+    height: '100%',
+    border: '1px solid black',
+    position: 'relative'
+  },
+  category: {
+    fontSize: '10px'
+  },
+  content: {
+
+  }
 };
 
 const boxTarget = {
@@ -71,8 +79,12 @@ class DragPage extends Component {
     const { connectDropTarget } = this.props;
 
     return connectDropTarget(
-      <div style={styles}>
+      <div style={styles.card}>
+      <div> 
+      {notes.map((val, key) => {
 
+      })}
+      </div>
         {notes.map((val, key) => {
           console.log(key, val)
           return (
@@ -80,11 +92,13 @@ class DragPage extends Component {
                 id={val.id}
                 left={val.left}
                 top={val.top}>
-            <div>{val.category}</div>
+            <div style={styles.category}>{val.category}</div>
             <div>{val.content}</div>
             </DraggableNote>
           )
         })}
+
+
       </div>
     );
   }

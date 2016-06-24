@@ -13,9 +13,9 @@ def create_app():
     from views.index import index_view
 
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost'
 
-    app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
+    app.config['SECRET_KEY'] = 'commonplace'
     
     app.register_blueprint(cp_book_api.blueprint, url_prefix='/api')
     app.register_blueprint(index_view)
@@ -27,4 +27,5 @@ def create_app():
 
     handler = StreamHandler(stdout)
     app.logger.addHandler(handler)
+
     return app

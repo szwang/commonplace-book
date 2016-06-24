@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { requestNotes, addNote } from '../actions/notes';
 import { logoutUser } from '../actions/auth';
 import { push } from 'react-router-redux';
+import { Link } from 'react-router';
 
 const styles = {
   notebookPage: {
@@ -38,6 +39,7 @@ class NotebookPage extends React.Component {
     return (
       <div style={styles.notebookPage}>
         <div onClick={this.onClickLogout.bind(this)}>Logout</div>
+        <Link to='/drag'>Drag Notes</Link>
         <Notes {...this.props}/>
       </div>
     )
