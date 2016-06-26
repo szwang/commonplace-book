@@ -88,7 +88,7 @@ class LoginAPI(Resource):
 
     user, auth_status = check_user_auth(password, username=username)
 
-    print user, auth_status
+    print 'success', user, auth_status
 
     if(auth_status):
       login_user(user)

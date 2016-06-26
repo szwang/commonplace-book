@@ -10,6 +10,7 @@ export function loginUser(data) {
 
     try {
       const result = await post('/api/auth/login', data);
+      console.log('result', result)
       dispatch({
         type: actionTypes.LOGIN_USER_SUCCESS
       })
