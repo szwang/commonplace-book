@@ -22,7 +22,8 @@ class NotebookPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.requestNotes(this.props.accounts.id);
+    const { requestNotes, accounts } = this.props;
+    requestNotes(accounts.id);
   }
 
   onClickLogout() {
