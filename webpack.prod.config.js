@@ -33,8 +33,6 @@ config = update(config, {
   plugins: {
     $push: [
       new CleanWebpackPlugin([SCRIPTS_PATH, TEMPLATES_PATH]),
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({ output: { comments: false } }),
       new HtmlWebpackPlugin({
         inject: true,
         filename: '../../templates/index.html',

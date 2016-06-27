@@ -2,7 +2,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from logging import StreamHandler
 from sys import stdout
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_login import LoginManager
 
 db = SQLAlchemy()
@@ -13,6 +13,7 @@ def create_app():
     from views.index import index_view
 
     app = Flask(__name__)
+
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost'
 
     app.config['SECRET_KEY'] = 'commonplace'
