@@ -1,5 +1,5 @@
 import os
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from logging import StreamHandler
 from sys import stdout
 from flask import Flask
